@@ -5,6 +5,14 @@ require_once MODEL_PATH . 'user.php';
 
 session_start();
 
+$token = get_post('csrf_token');
+
+if(is_valid_csrf_token($token) === false){
+  exit('不正なリクエストです');
+}
+
+unset($_SESSION['csrf_token']);
+
 if(is_logined() === true){
   redirect_to(HOME_URL);
 }

@@ -14,5 +14,6 @@ CREATE TABLE detail_histories (
     history_id int(11) NOT NULL,
     item_id int(11) NOT NULL,
     amount int(11) NOT NULL,
+    price int(11) NOT NULL,
     primary key(id)
 );

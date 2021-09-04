@@ -2,7 +2,7 @@
 
 CREATE TABLE histories (
     id int(11) AUTO_INCREMENT,
-    user_id int(ii) NOT NULL,
+    user_id int(11) NOT NULL,
     created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     primary key(id)
 );

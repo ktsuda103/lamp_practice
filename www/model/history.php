@@ -1,5 +1,5 @@
 <?php
-function insert_history(){
+function insert_history($db,$user_id){
     $sql = "
         INSERT INTO
             histories(

@@ -1,5 +1,5 @@
 <?php
-function insert_detail_history(){
+function insert_detail_history($db,$history_id,$item_id,$amount,$price){
     $sql = "
         INSERT INTO
             detail_histories(
@@ -10,5 +10,5 @@ function insert_detail_history(){
             )
         VALUES(?,?,?,?);
     ";
-    return execute_query($db,$sql,[$user_id,$history_id,$amount,$price]);
+    return execute_query($db,$sql,[$history_id,$item_id,$amount,$price]);
 }

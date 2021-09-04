@@ -9,7 +9,7 @@
 <?php 
 include VIEW_PATH . 'templates/header_logined.php'; 
 ?>
-<?php if($user['user_id'] === $history[0]['user_id']): ?>
+<?php if($user['user_id'] === $history[0]['user_id'] || $user['user_id'] === 4): ?>
 <h1>購入履歴画面</h1>
 <table border=1 class="w-50">
     <tr>

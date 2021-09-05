@@ -59,17 +59,28 @@
       <a href="history.php">購入履歴画面へ</a>
       </div>
     </div>
+    <hr>
+    <h2>人気ランキング</h2>
+    <div class="row">
+    <?php for($i=0; $i<=2; $i++): ?>  
+      <div class="card col-md-4 p-0">
+        <div class="card-header">第<?php echo $i+1; ?>位</div>
+        <div class="card-body"><img class="img-fluid" src="<?php echo IMAGE_PATH.h($ranking[$i]['image']); ?>"></div>
+        <div class="card-footer"><?php echo h($ranking[$i]['name']); ?></div>
+      </div>
+    <?php endfor; ?>
+    </div>
     <div class="text-center">
       <?php if($page > 1): ?>
-        <a href="index.php?sort=<?php echo $num; ?>&page=<?php echo $page-1; ?>">前のページへ</a>
+        <a href="index.php?sort=<?php echo h($num); ?>&page=<?php echo h($page-1); ?>">前のページへ</a>
       <?php else: ?>
         <p class="d-inline">前のページへ</p>
       <?php endif; ?>
       <?php for($i = 1; $i <= $count; $i++): ?>
-        <a style="<?php if($page==$i){echo 'color:#cc66ff;';} ?>" href="index.php?sort=<?php echo $num; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+        <a style="<?php if($page==$i){echo 'color:#cc66ff;';} ?>" href="index.php?sort=<?php echo h($num); ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
       <?php endfor; ?>
       <?php if($page+1 <= $count): ?>
-        <a href="index.php?sort=<?php echo $num; ?>&page=<?php echo $page+1; ?>">次のページへ</a>
+        <a href="index.php?sort=<?php echo h($num); ?>&page=<?php echo h($page+1); ?>">次のページへ</a>
       <?php else: ?>
         <p class="d-inline">次のページへ</p>
       <?php endif; ?>

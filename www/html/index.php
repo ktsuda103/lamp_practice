@@ -38,5 +38,8 @@ if($page > $count){
 $page_num = get_page($page);
 
 $items = get_open_items($db,$num,$page_num);
-//dd($items);
+
+$ranking = get_ranking($db);
+//dd($ranking[0]);
+
 include_once VIEW_PATH . 'index_view.php';

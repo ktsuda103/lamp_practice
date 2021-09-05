@@ -4,6 +4,8 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'cart.php';
+require_once MODEL_PATH . 'history.php';
+require_once MODEL_PATH . 'detail_history.php';
 
 session_start();
 
@@ -24,10 +26,24 @@ $user = get_login_user($db);
 
 $carts = get_user_carts($db, $user['user_id']);
 
-if(purchase_carts($db, $carts) === false){
-  set_error('商品が購入できませんでした。');
-  redirect_to(CART_URL);
-} 
+$db->beginTransaction();
+try{
+  if(purchase_carts($db, $carts) === false){
+    set_error('商品が購入できませんでした。');
+    redirect_to(CART_URL);
+  } 
+  insert_history($db,$user['user_id']);
+  $history_id = $db->lastInsertId('histories');
+  foreach($carts as $cart){
+    $item = get_item($db,$cart['item_id']);
+    insert_detail_history($db,$history_id,$cart['item_id'],$cart['amount'],$item['price']*$cart['amount']);
+  }
+  $db->commit();
+} catch(PDOException $e) {
+  $db->rollback();
+  throw $e;
+}
+
 
 $total_price = sum_carts($carts);
 

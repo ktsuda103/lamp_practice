@@ -36,7 +36,7 @@ try{
   $history_id = $db->lastInsertId('histories');
   foreach($carts as $cart){
     $item = get_item($db,$cart['item_id']);
-    insert_detail_history($db,$history_id,$cart['item_id'],$cart['amount'],$item['price']*$cart['amount']);
+    insert_detail_history($db,$history_id,$cart['item_id'],$cart['amount'],$item['price']);
   }
   $db->commit();
 } catch(PDOException $e) {

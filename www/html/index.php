@@ -17,6 +17,10 @@ $token = get_csrf_token();
 $db = get_db_connect();
 $user = get_login_user($db);
 
-$items = get_open_items($db);
-
+$num = get_get('sort');
+if(!preg_match('/^[0-2]$/',$num)){
+  $num = 0;
+} 
+$items = get_open_items($db,$num);
+//dd($items);
 include_once VIEW_PATH . 'index_view.php';

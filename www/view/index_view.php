@@ -40,6 +40,7 @@
           </div>
         </div>
       <?php } ?>
+      <a href="history.php">購入履歴画面へ</a>
       </div>
     </div>
   </div>

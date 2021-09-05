@@ -21,6 +21,22 @@ $num = get_get('sort');
 if(!preg_match('/^[0-2]$/',$num)){
   $num = 0;
 } 
-$items = get_open_items($db,$num);
+$count_items = count_items($db,true);
+$count = count_pages($count_items);
+$page = get_get('page');
+
+if($page === ''){
+  $page = 1;
+}
+
+if($page > $count){
+  $page = $count;
+} elseif($page < 1){
+  $page = 1;
+}
+
+$page_num = get_page($page);
+
+$items = get_open_items($db,$num,$page_num);
 //dd($items);
 include_once VIEW_PATH . 'index_view.php';

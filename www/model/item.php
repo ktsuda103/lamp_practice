@@ -22,6 +22,31 @@ function get_item($db, $item_id){
   return fetch_query($db, $sql, $params);
 }
 
+function count_items($db, $is_open = false){
+  $sql = '
+    SELECT
+      COUNT(*) as cnt
+    FROM
+      items
+    ';
+  if($is_open === true){
+    $sql .= '
+      WHERE status = 1
+    ';
+  }
+  return fetch_query($db, $sql);
+}
+
+function count_pages($count){
+  $count = ceil($count['cnt']/8);
+  return $count;
+}
+
+function get_page($page){
+  $page = 8*($page-1);
+  return $page;
+}
+
 function get_items_sql($db, $is_open = false){
   $sql = '
     SELECT
@@ -48,22 +73,23 @@ function get_items($db){
   return fetch_all_query($db, $sql);
 }
 
-function get_sort_items($db,$num){
+function get_sort_items($db,$num,$page){
   $sql = get_items_sql($db, true);
   $sort = array('created DESC','price','price DESC');
   $sql .= '
     ORDER BY
-    '.$sort[$num]
-  ;
-  return fetch_all_query($db, $sql);
+    '.$sort[$num].'
+      LIMIT ?,8
+    ';
+  return fetch_all_query($db, $sql,[$page]);
 }
 
 function get_all_items($db){
   return get_items($db);
 }
 
-function get_open_items($db,$num){
-  return get_sort_items($db,$num, true);
+function get_open_items($db,$num,$page){
+  return get_sort_items($db,$num,$page,true);
 }
 
 function regist_item($db, $name, $price, $stock, $status, $image){

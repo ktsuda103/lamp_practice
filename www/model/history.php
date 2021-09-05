@@ -16,7 +16,7 @@ function get_all_histories($db){
         SELECT 
             h.id,
             h.created_at,
-            SUM(d.price*d.amount)
+            SUM(d.price*d.amount) as sum
         FROM
             histories as h
         JOIN
@@ -36,8 +36,8 @@ function get_histories($db,$user_id){
         SELECT 
             h.id,
             h.created_at,
-            SUM(d.price*d.amount)
-        FROM
+            SUM(d.price*d.amount) as sum
+        FROM 
             histories as h
         JOIN
             detail_histories as d
@@ -59,7 +59,7 @@ function get_history($db,$history_id){
             h.id,
             h.created_at,
             h.user_id,
-            SUM(d.price*d.amount)
+            SUM(d.price*d.amount) as sum
         FROM
             histories as h
         JOIN

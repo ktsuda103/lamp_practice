@@ -22,7 +22,7 @@ include VIEW_PATH . 'templates/header_logined.php';
     <tr>
         <td><?php echo h($history['id']); ?></td>
         <td><?php echo h($history['created_at']); ?></td>
-        <td><?php echo number_format(h($history['SUM(d.price*d.amount)'])); ?></td>
+        <td><?php echo number_format(h($history['sum'])); ?></td>
         <td><a href="detail_history.php?history_id=<?php echo h($history['id']); ?>">購入明細表示</a></td>
     </tr>
     <?php endforeach; ?>

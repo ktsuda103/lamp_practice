@@ -20,7 +20,7 @@ include VIEW_PATH . 'templates/header_logined.php';
     <tr>
         <td><?php echo h($history[0]['id']); ?></td>
         <td><?php echo h($history[0]['created_at']); ?></td>
-        <td><?php echo number_format(h($history[0]['SUM(d.price*d.amount)'])); ?></td>
+        <td><?php echo number_format(h($history[0]['sum'])); ?></td>
     </tr>
 </table>
 <hr>

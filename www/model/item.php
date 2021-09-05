@@ -43,8 +43,13 @@ function get_items_sql($db, $is_open = false){
   return $sql;
 }
 
-function get_items($db,$num){
-  $sql = get_items_sql($db, $is_open = false);
+function get_items($db){
+  $sql = get_items_sql($db);
+  return fetch_all_query($db, $sql);
+}
+
+function get_sort_items($db,$num){
+  $sql = get_items_sql($db, true);
   $sort = array('created DESC','price','price DESC');
   $sql .= '
     ORDER BY
@@ -58,7 +63,7 @@ function get_all_items($db){
 }
 
 function get_open_items($db,$num){
-  return get_items($db,$num, true);
+  return get_sort_items($db,$num, true);
 }
 
 function regist_item($db, $name, $price, $stock, $status, $image){

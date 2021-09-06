@@ -84,6 +84,28 @@ function get_sort_items($db,$num,$page){
   return fetch_all_query($db, $sql,[$page]);
 }
 
+function get_ranking($db){
+  $sql = '
+    SELECT
+      SUM(d.amount) as sum,
+      i.name,
+      i.image
+    FROM
+      detail_histories as d
+    JOIN
+      items as i
+    ON
+      d.item_id = i.item_id
+    GROUP BY
+      d.item_id
+    ORDER BY
+      sum DESC
+    LIMIT
+      0,3
+  ';
+  return fetch_all_query($db,$sql);
+}
+
 function get_all_items($db){
   return get_items($db);
 }

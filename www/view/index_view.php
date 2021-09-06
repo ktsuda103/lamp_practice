@@ -12,6 +12,14 @@
 
   <div class="container">
     <h1>商品一覧</h1>
+    <p><?php echo $count_items['cnt']; ?>件中<?php echo (($page-1)*8)+1; ?>-
+      <?php
+      if($page*8 <= $count_items['cnt']){
+        echo ($page)*8;
+      }else{
+        echo $count_items['cnt'];
+      } ?>
+    件目の商品</p>
     <form class="text-right">
       <select name="sort" id="">
         <option value="0" selected>新着順</option>
@@ -51,7 +59,21 @@
       <a href="history.php">購入履歴画面へ</a>
       </div>
     </div>
+    <div class="text-center">
+      <?php if($page > 1): ?>
+        <a href="index.php?sort=<?php echo $num; ?>&page=<?php echo $page-1; ?>">前のページへ</a>
+      <?php else: ?>
+        <p class="d-inline">前のページへ</p>
+      <?php endif; ?>
+      <?php for($i = 1; $i <= $count; $i++): ?>
+        <a style="<?php if($page==$i){echo 'color:#cc66ff;';} ?>" href="index.php?sort=<?php echo $num; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+      <?php endfor; ?>
+      <?php if($page+1 <= $count): ?>
+        <a href="index.php?sort=<?php echo $num; ?>&page=<?php echo $page+1; ?>">次のページへ</a>
+      <?php else: ?>
+        <p class="d-inline">次のページへ</p>
+      <?php endif; ?>
+    </div>
   </div>
-  
 </body>
 </html>
